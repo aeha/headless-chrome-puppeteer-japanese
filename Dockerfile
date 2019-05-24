@@ -7,11 +7,16 @@ RUN sed -i -E "s@http://(archive|security)\.ubuntu\.com/ubuntu/@http://ftp.jaist
 
 # Basic
 RUN apt-get update \
+    && apt-get install -y vim \
     && apt-get install -y sudo curl wget zip unzip git nodejs npm fontconfig \
     && apt-get purge -y nodejs npm \
     && curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - \
     && apt-get install -y nodejs \
     && npm install -g yarn
+
+# pupetter
+RUN yarn add puppeteer
+
 
 # Chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - \
